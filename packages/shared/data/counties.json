@@ -1,0 +1,1289 @@
+[
+  {
+    "fips": "12001",
+    "name": "Alachua",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SJRWMD",
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12003",
+    "name": "Baker",
+    "state": "FL",
+    "region": "Northeast",
+    "water_management_districts": [
+      "SJRWMD",
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12005",
+    "name": "Bay",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12007",
+    "name": "Bradford",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SJRWMD",
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12009",
+    "name": "Brevard",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12011",
+    "name": "Broward",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": "https://geohub-bcgis.opendata.arcgis.com/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12013",
+    "name": "Calhoun",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12015",
+    "name": "Charlotte",
+    "state": "FL",
+    "region": "Southwest",
+    "water_management_districts": [
+      "SWFWMD",
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12017",
+    "name": "Citrus",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12019",
+    "name": "Clay",
+    "state": "FL",
+    "region": "Northeast",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12021",
+    "name": "Collier",
+    "state": "FL",
+    "region": "Southwest",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12023",
+    "name": "Columbia",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12027",
+    "name": "DeSoto",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12029",
+    "name": "Dixie",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12031",
+    "name": "Duval",
+    "state": "FL",
+    "region": "Northeast",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": "https://maps.coj.net/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "Custom WebGIS (JaxGIS)",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12033",
+    "name": "Escambia",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12035",
+    "name": "Flagler",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12037",
+    "name": "Franklin",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12039",
+    "name": "Gadsden",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12041",
+    "name": "Gilchrist",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12043",
+    "name": "Glades",
+    "state": "FL",
+    "region": "Southwest",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12045",
+    "name": "Gulf",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12047",
+    "name": "Hamilton",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12049",
+    "name": "Hardee",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12051",
+    "name": "Hendry",
+    "state": "FL",
+    "region": "Southwest",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12053",
+    "name": "Hernando",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12055",
+    "name": "Highlands",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD",
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12057",
+    "name": "Hillsborough",
+    "state": "FL",
+    "region": "Tampa Bay",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": "https://hcfl.gov/about-hillsborough/open-data-and-gis/geohub",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12059",
+    "name": "Holmes",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12061",
+    "name": "Indian River",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12063",
+    "name": "Jackson",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12065",
+    "name": "Jefferson",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD",
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12067",
+    "name": "Lafayette",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12069",
+    "name": "Lake",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD",
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12071",
+    "name": "Lee",
+    "state": "FL",
+    "region": "Southwest",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": "https://maps-leegis.hub.arcgis.com/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12073",
+    "name": "Leon",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12075",
+    "name": "Levy",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SWFWMD",
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12077",
+    "name": "Liberty",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12079",
+    "name": "Madison",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12081",
+    "name": "Manatee",
+    "state": "FL",
+    "region": "Tampa Bay",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12083",
+    "name": "Marion",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SWFWMD",
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12085",
+    "name": "Martin",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12086",
+    "name": "Miami-Dade",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": "https://gis-mdc.opendata.arcgis.com/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12087",
+    "name": "Monroe",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12089",
+    "name": "Nassau",
+    "state": "FL",
+    "region": "Northeast",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12091",
+    "name": "Okaloosa",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12093",
+    "name": "Okeechobee",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD",
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12095",
+    "name": "Orange",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD",
+      "SFWMD"
+    ],
+    "gis_open_data_url": "https://data-orangecountygis.hub.arcgis.com/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12097",
+    "name": "Osceola",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD",
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12099",
+    "name": "Palm Beach",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": "https://opendata2-pbcgov.opendata.arcgis.com/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12101",
+    "name": "Pasco",
+    "state": "FL",
+    "region": "Tampa Bay",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12103",
+    "name": "Pinellas",
+    "state": "FL",
+    "region": "Tampa Bay",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": "https://new-pinellas-egis.opendata.arcgis.com/",
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": "ArcGIS Hub",
+    "license": "Public Domain (assumed - U.S. local government open data); confirm per-county terms",
+    "refresh_cadence": "weekly",
+    "schema_notes": null,
+    "data_quality_status": "partially_verified",
+    "verified_at": "2026-06-18"
+  },
+  {
+    "fips": "12105",
+    "name": "Polk",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD",
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12107",
+    "name": "Putnam",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SJRWMD",
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12109",
+    "name": "St. Johns",
+    "state": "FL",
+    "region": "Northeast",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12111",
+    "name": "St. Lucie",
+    "state": "FL",
+    "region": "Southeast",
+    "water_management_districts": [
+      "SFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12113",
+    "name": "Santa Rosa",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12115",
+    "name": "Sarasota",
+    "state": "FL",
+    "region": "Southwest",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12117",
+    "name": "Seminole",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12119",
+    "name": "Sumter",
+    "state": "FL",
+    "region": "West Central",
+    "water_management_districts": [
+      "SWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12121",
+    "name": "Suwannee",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12123",
+    "name": "Taylor",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12125",
+    "name": "Union",
+    "state": "FL",
+    "region": "North Central",
+    "water_management_districts": [
+      "SRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12127",
+    "name": "Volusia",
+    "state": "FL",
+    "region": "East Central",
+    "water_management_districts": [
+      "SJRWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12129",
+    "name": "Wakulla",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12131",
+    "name": "Walton",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  },
+  {
+    "fips": "12133",
+    "name": "Washington",
+    "state": "FL",
+    "region": "Panhandle",
+    "water_management_districts": [
+      "NWFWMD"
+    ],
+    "gis_open_data_url": null,
+    "procurement_url": null,
+    "permits_url": null,
+    "parcels_url": null,
+    "access_method": null,
+    "license": null,
+    "refresh_cadence": "manual",
+    "schema_notes": null,
+    "data_quality_status": "needs_verification",
+    "verified_at": null
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "name": "firip",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FIRIP - Florida Risk + Water Intelligence Platform",
+  "workspaces": [
+    "apps/web",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspace=packages/shared && npm run build --workspace=apps/web",
+    "lint": "npm run lint --workspace=apps/web",
+    "typecheck": "npm run typecheck --workspace=packages/shared && npm run typecheck --workspace=apps/web",
+    "test": "npm run test --workspace=apps/web",
+    "test:e2e": "npm run test:e2e --workspace=apps/web",
+    "format": "prettier --write \"apps/web/**/*.{ts,tsx}\" \"packages/shared/**/*.ts\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
