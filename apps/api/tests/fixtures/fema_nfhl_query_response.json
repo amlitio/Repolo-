@@ -1,0 +1,54 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented ArcGIS REST GeoJSON query response schema for fema-nfhl (FEMA National Flood Hazard Layer MapServer), not a captured real response.",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-80.3, 25.7], [-80.2, 25.7], [-80.2, 25.8], [-80.3, 25.8], [-80.3, 25.7]]]
+      },
+      "properties": {
+        "OBJECTID": 100001,
+        "FLD_AR_ID": "12086C0001A",
+        "CO_FIPS": "12086",
+        "FLD_ZONE": "AE",
+        "ZONE_SUBTY": null,
+        "STATIC_BFE": 9.0,
+        "EFF_DATE": "2009-09-11"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-80.4, 25.9], [-80.3, 25.9], [-80.3, 26.0], [-80.4, 26.0], [-80.4, 25.9]]]
+      },
+      "properties": {
+        "OBJECTID": 100002,
+        "FLD_AR_ID": "12086C0002A",
+        "CO_FIPS": "12086",
+        "FLD_ZONE": "X",
+        "ZONE_SUBTY": "AREA OF MINIMAL FLOOD HAZARD",
+        "STATIC_BFE": null,
+        "EFF_DATE": "2009-09-11"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-80.5, 26.1], [-80.4, 26.1], [-80.4, 26.2], [-80.5, 26.2], [-80.5, 26.1]]]
+      },
+      "properties": {
+        "OBJECTID": 100003,
+        "FLD_AR_ID": "12086C0003A",
+        "CO_FIPS": "12086",
+        "FLD_ZONE": "VE",
+        "ZONE_SUBTY": "COASTAL HIGH HAZARD",
+        "STATIC_BFE": 12.0,
+        "EFF_DATE": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented USGS Water Data OGC API 'monitoring-locations' collection response schema (usgs-water-data-ogcapi), not a captured real response.",
+  "type": "FeatureCollection",
+  "numberReturned": 2,
+  "features": [
+    {
+      "type": "Feature",
+      "id": "USGS-02289500",
+      "geometry": { "type": "Point", "coordinates": [-81.626, 28.064] },
+      "properties": {
+        "monitoring_location_id": "USGS-02289500",
+        "monitoring_location_name": "KISSIMMEE RIVER AT S-65, FL",
+        "state_fips_code": "12",
+        "county_code": "097",
+        "parameter_codes": ["00060", "00065"]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "USGS-02300500",
+      "geometry": { "type": "Point", "coordinates": [-82.345, 28.038] },
+      "properties": {
+        "monitoring_location_id": "USGS-02300500",
+        "monitoring_location_name": "HILLSBOROUGH RIVER NEAR ZEPHYRHILLS, FL",
+        "state_fips_code": "12",
+        "county_code": "101",
+        "parameter_codes": ["00060", "00010"]
+      }
+    }
+  ]
+}

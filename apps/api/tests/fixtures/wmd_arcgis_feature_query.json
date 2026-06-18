@@ -1,0 +1,24 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented ArcGIS FeatureServer GeoJSON query response schema, used generically to test wmd_arcgis.py against SFWMD/SJRWMD/SWFWMD/NWFWMD, not a captured real response.",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-80.65, 26.5] },
+      "properties": {
+        "OBJECTID": 1,
+        "LAYER_NAME": "Water Control Structures",
+        "STRUCT_NAME": "S-65A"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-80.7, 26.6] },
+      "properties": {
+        "OBJECTID": 2,
+        "LAYER_NAME": "Water Control Structures",
+        "STRUCT_NAME": "S-65B"
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented response schema for nws-alerts (NOAA/NWS Alerts API, GeoJSON, https://www.weather.gov/documentation/services-web-api), not a captured real response.",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "urn:oid:2.49.0.1.840.0.test-flood-warning-001",
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "id": "urn:oid:2.49.0.1.840.0.test-flood-warning-001",
+        "event": "Flood Warning",
+        "severity": "Severe",
+        "certainty": "Likely",
+        "urgency": "Expected",
+        "headline": "Flood Warning issued for Miami-Dade County",
+        "description": "Heavy rainfall is expected to cause flooding of low-lying areas.",
+        "areaDesc": "Miami-Dade, FL",
+        "effective": "2026-06-18T08:00:00-04:00",
+        "onset": "2026-06-18T08:00:00-04:00",
+        "expires": "2026-06-19T08:00:00-04:00",
+        "ends": "2026-06-19T08:00:00-04:00",
+        "geocode": {
+          "SAME": ["012086"],
+          "UGC": ["FLC086"]
+        }
+      }
+    },
+    {
+      "id": "urn:oid:2.49.0.1.840.0.test-coastal-flood-advisory-002",
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "id": "urn:oid:2.49.0.1.840.0.test-coastal-flood-advisory-002",
+        "event": "Coastal Flood Advisory",
+        "severity": "Minor",
+        "certainty": "Possible",
+        "urgency": "Future",
+        "headline": "Coastal Flood Advisory for Monroe County",
+        "description": "Minor coastal flooding possible during high tide.",
+        "areaDesc": "Monroe, FL",
+        "effective": "2026-06-18T06:00:00-04:00",
+        "onset": "2026-06-18T06:00:00-04:00",
+        "expires": "2026-06-18T18:00:00-04:00",
+        "ends": "2026-06-18T18:00:00-04:00",
+        "geocode": {
+          "SAME": ["012087"],
+          "UGC": ["FLZ087"]
+        }
+      }
+    },
+    {
+      "id": "urn:oid:2.49.0.1.840.0.test-missing-effective-003",
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "id": "urn:oid:2.49.0.1.840.0.test-missing-effective-003",
+        "event": "Special Weather Statement",
+        "severity": "Unknown",
+        "certainty": "Unknown",
+        "urgency": "Unknown",
+        "headline": "Malformed record missing effective/expires - should be skipped",
+        "description": "",
+        "areaDesc": "Statewide, FL",
+        "geocode": { "SAME": [], "UGC": [] }
+      }
+    }
+  ]
+}

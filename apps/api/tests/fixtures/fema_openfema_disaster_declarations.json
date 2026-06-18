@@ -1,0 +1,47 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented OpenFEMA v2 DisasterDeclarationsSummaries response schema (fema-openfema-disaster-declarations), not a captured real response.",
+  "metadata": {
+    "skip": 0,
+    "top": 1000,
+    "count": 2
+  },
+  "DisasterDeclarationsSummaries": [
+    {
+      "id": "abc-123",
+      "disasterNumber": 4750,
+      "state": "FL",
+      "declarationType": "DR",
+      "declarationDate": "2025-09-12T00:00:00.000Z",
+      "fyDeclared": 2025,
+      "incidentType": "Hurricane",
+      "declarationTitle": "HURRICANE TEST EVENT",
+      "fipsStateCode": "12",
+      "fipsCountyCode": "12086",
+      "placeCode": "99086"
+    },
+    {
+      "id": "def-456",
+      "disasterNumber": 4751,
+      "state": "FL",
+      "declarationType": "DR",
+      "declarationDate": "2025-10-02T00:00:00.000Z",
+      "fyDeclared": 2026,
+      "incidentType": "Flood",
+      "declarationTitle": "SEVERE STORMS AND FLOODING",
+      "fipsStateCode": "12",
+      "fipsCountyCode": "12057",
+      "placeCode": "99057"
+    },
+    {
+      "id": "ghi-789-malformed",
+      "disasterNumber": 4752,
+      "state": "FL",
+      "declarationType": "DR",
+      "declarationDate": null,
+      "incidentType": "Flood",
+      "declarationTitle": "RECORD WITH NO DATE - SHOULD BE SKIPPED",
+      "fipsStateCode": "12",
+      "fipsCountyCode": "12057"
+    }
+  ]
+}
