@@ -1,0 +1,26 @@
+{
+  "model_version": "2026.06.0",
+  "property_risk_weights": {
+    "fema_flood_zone": 0.3,
+    "elevation_proximity_to_water": 0.2,
+    "active_weather_alerts": 0.15,
+    "water_level_trend": 0.1,
+    "hurricane_exposure": 0.15,
+    "historical_claims_mitigation": 0.1
+  },
+  "county_risk_weights": {
+    "flood_zone_coverage": 0.25,
+    "active_alert_severity": 0.2,
+    "water_level_trend": 0.15,
+    "hurricane_exposure_history": 0.2,
+    "drought_flood_indicators": 0.1,
+    "claims_and_mitigation_density": 0.1
+  },
+  "grade_thresholds": [
+    { "max": 20, "grade": "A" },
+    { "max": 40, "grade": "B" },
+    { "max": 60, "grade": "C" },
+    { "max": 80, "grade": "D" },
+    { "max": null, "grade": "F" }
+  ]
+}

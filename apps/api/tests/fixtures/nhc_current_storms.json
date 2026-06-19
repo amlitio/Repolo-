@@ -1,0 +1,15 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented NHC CurrentStorms.json schema (https://www.nhc.noaa.gov/CurrentStorms.json), not a captured real response. NHC's full GIS track/cone products are Shapefile/KMZ and are NOT covered by this fixture - see nhc.py docstring for documented limitations.",
+  "activeStorms": [
+    {
+      "id": "al052026",
+      "binNumber": "AL05",
+      "name": "Test Storm Iris",
+      "classification": "HU",
+      "advisoryNumber": "12",
+      "latitudeNumeric": 25.8,
+      "longitudeNumeric": -82.1,
+      "lastUpdate": "2026-06-18T15:00:00+00:00"
+    }
+  ]
+}

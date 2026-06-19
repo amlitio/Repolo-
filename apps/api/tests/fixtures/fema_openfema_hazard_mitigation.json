@@ -1,0 +1,21 @@
+{
+  "_fixture_note": "Synthetic fixture modeled on the documented OpenFEMA v2 HazardMitigationAssistanceProjects response schema (fema-openfema-hazard-mitigation), not a captured real response.",
+  "metadata": {
+    "skip": 0,
+    "top": 1000,
+    "count": 1
+  },
+  "HazardMitigationAssistanceProjects": [
+    {
+      "id": "proj-001",
+      "projectIdentifier": "FL-BRIC-0001",
+      "programArea": "BRIC",
+      "status": "Obligated",
+      "projectTitle": "Stormwater Pump Station Upgrade",
+      "countyCode": "12086",
+      "state": "FL",
+      "federalShareObligated": 2500000.0,
+      "dateApproved": "2025-03-15T00:00:00.000Z"
+    }
+  ]
+}
