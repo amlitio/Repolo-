@@ -1,0 +1,9 @@
+# apps/workers reuses apps/api's connectors, models, db session, registry,
+# and scoring engine directly (import app.* ) rather than duplicating them -
+# see app/connectors/base.py's Connector.run() docstring, which names
+# apps/workers jobs as its intended caller. Installing apps/api as an
+# editable package gives us that import path; -r pulls its actual runtime
+# dependencies (FastAPI, SQLAlchemy, GeoAlchemy2, pgvector, httpx, ...),
+# since apps/api/pyproject.toml itself declares no [project.dependencies].
+-r ../api/requirements.txt
+-e ../api
