@@ -10,6 +10,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import get_db
+from app.models.types import is_valid_guid
 from app.models.water import WaterObservation as WaterObservationModel
 from app.models.water import WaterStation as WaterStationModel
 from app.schemas.common import Paginated
@@ -73,6 +74,11 @@ async def list_water_observations(
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=500),
 ) -> Paginated[WaterObservation]:
+    if station_id and not is_valid_guid(station_id):
+        # A malformed/unknown station id can never match any observation -
+        # return an empty page rather than letting the GUID column raise.
+        return Paginated[WaterObservation](items=[], total=0, page=page, page_size=page_size)
+
     stmt = select(WaterObservationModel)
     if station_id:
         stmt = stmt.where(WaterObservationModel.station_id == station_id)

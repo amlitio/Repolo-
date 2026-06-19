@@ -55,6 +55,24 @@ class GUID(TypeDecorator):
         return str(value)
 
 
+def is_valid_guid(value: str | None) -> bool:
+    """True if `value` is a syntactically valid UUID string.
+
+    Routers that accept a client-supplied id for a GUID-typed column (e.g.
+    `property_id` as a query param) should check this BEFORE querying:
+    GUID.process_bind_param raises ValueError on malformed input, which
+    would otherwise surface as an unhandled 500 instead of a clean 404 for
+    something as ordinary as a typo'd id.
+    """
+    if not value:
+        return False
+    try:
+        uuid.UUID(value)
+    except (ValueError, AttributeError, TypeError):
+        return False
+    return True
+
+
 class PortableGeometry(UserDefinedType):
     """Geometry column that is a real PostGIS geometry on Postgres and a
     GeoJSON-serialized TEXT column elsewhere (e.g. SQLite in unit tests)."""

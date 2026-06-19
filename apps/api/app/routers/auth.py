@@ -8,6 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import CurrentUser, get_current_user
+from app.core.provisioning import ensure_user_and_org
 from app.db import get_db
 from app.models.org import Membership, Organization
 from app.schemas.common import Paginated
@@ -43,10 +44,12 @@ async def list_orgs(
     page: int = 1,
     page_size: int = 20,
 ) -> Paginated[OrganizationSchema]:
+    user, _org = await ensure_user_and_org(db, current_user)
+    await db.commit()
     stmt = (
         select(Organization)
         .join(Membership, Membership.organization_id == Organization.id)
-        .where(Membership.user_id == current_user.user_id)
+        .where(Membership.user_id == user.id)
     )
     result = await db.execute(stmt)
     orgs = result.scalars().all()

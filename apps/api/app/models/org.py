@@ -16,6 +16,7 @@ class Organization(Base, TimestampMixin):
     __tablename__ = "organizations"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
+    clerk_org_id: Mapped[str | None] = mapped_column(String(255), nullable=True, unique=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     slug: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     plan: Mapped[str] = mapped_column(String(50), nullable=False, default="free")

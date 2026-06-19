@@ -82,7 +82,6 @@ export function MapCanvas({ visibleLayerIds, layers, flyTo }: MapCanvasProps) {
       mapRef.current?.remove();
       mapRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- map is initialized once per mount
   }, [token]);
 
   useEffect(() => {

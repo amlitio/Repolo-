@@ -22,6 +22,7 @@ from app.models.risk import CountyRiskScore as CountyRiskScoreModel
 from app.models.risk import Property
 from app.models.risk import PropertyRiskScore as PropertyRiskScoreModel
 from app.models.risk import ScoreExplanation
+from app.models.types import is_valid_guid
 from app.schemas.risk import CountyRiskScore, PropertyRiskScore, RiskExplainResponse, RiskFactor
 
 router = APIRouter(tags=["risk"])
@@ -54,6 +55,11 @@ async def get_property_risk(
         if prop is None:
             raise NotFoundError(f"No property found for address '{address}'")
         resolved_property_id = prop.id
+
+    if not is_valid_guid(resolved_property_id):
+        # A malformed/unknown id can never have a persisted score - 404
+        # cleanly rather than letting the GUID column raise on bind.
+        raise NotFoundError(f"No risk score has been computed for property '{resolved_property_id}'")
 
     result = await db.execute(
         select(PropertyRiskScoreModel)
@@ -125,6 +131,11 @@ async def explain_risk(
 ) -> RiskExplainResponse:
     if not property_id and not county_fips:
         raise NotFoundError("Provide either 'property_id' or 'county_fips'")
+
+    if property_id and not is_valid_guid(property_id):
+        # A malformed/unknown id can never have a persisted explanation -
+        # 404 cleanly rather than letting the GUID column raise on bind.
+        raise NotFoundError("No persisted explanation found for the given identifier")
 
     stmt = select(ScoreExplanation)
     if property_id:

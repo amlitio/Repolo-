@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { MapCanvas } from "@/components/map/MapCanvas";
 import { LayerManager } from "@/components/map/LayerManager";
 import { IntelligencePanel } from "@/components/map/IntelligencePanel";
@@ -11,23 +11,25 @@ import type { MapSearchResult } from "@/lib/api/endpoints";
 
 export default function MapWorkspacePage() {
   const { data: layers } = useMapLayers();
-  const [visibleLayerIds, setVisibleLayerIds] = useState<string[]>([]);
-  const [defaultsSeeded, setDefaultsSeeded] = useState(false);
+  // `null` means "no manual toggles yet" - in that state visibility is
+  // derived straight from each layer's `default_visible` flag once `layers`
+  // arrives, with no effect/setState round-trip needed. The first manual
+  // toggle materializes an explicit id array that takes over as the source
+  // of truth from then on.
+  const [manualVisibleLayerIds, setManualVisibleLayerIds] = useState<string[] | null>(null);
   const [selection, setSelection] = useState<MapSearchResult | null>(null);
 
-  // Seed default-visible layers once layer defs arrive (once only - after
-  // that, the user's own toggles are the source of truth).
-  useEffect(() => {
-    if (!layers || defaultsSeeded) return;
-    const defaults = layers.filter((layer) => layer.default_visible).map((layer) => layer.id);
-    setVisibleLayerIds(defaults);
-    setDefaultsSeeded(true);
-  }, [layers, defaultsSeeded]);
+  const defaultVisibleLayerIds = useMemo(
+    () => (layers ?? []).filter((layer) => layer.default_visible).map((layer) => layer.id),
+    [layers]
+  );
+  const visibleLayerIds = manualVisibleLayerIds ?? defaultVisibleLayerIds;
 
   function handleToggleLayer(layerId: string, visible: boolean) {
-    setVisibleLayerIds((current) =>
-      visible ? [...current, layerId] : current.filter((id) => id !== layerId)
-    );
+    setManualVisibleLayerIds((current) => {
+      const base = current ?? defaultVisibleLayerIds;
+      return visible ? [...base, layerId] : base.filter((id) => id !== layerId);
+    });
   }
 
   const flyTo = selection ? { center: selection.centroid, zoom: 11 } : null;
