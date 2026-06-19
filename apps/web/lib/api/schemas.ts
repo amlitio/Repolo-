@@ -185,19 +185,21 @@ export const ingestionRunSchema = z.object({
   id: z.string(),
   source_id: z.string(),
   started_at: z.string(),
-  finished_at: z.string().nullable().optional(),
+  finished_at: z.string().nullable(),
   status: z.string(),
-  records_ingested: z.number().nullable().optional(),
-  error: z.string().nullable().optional(),
+  records_fetched: z.number(),
+  records_normalized: z.number(),
+  error_message: z.string().nullable(),
 });
 
 export const auditLogEntrySchema = z.object({
   id: z.string(),
-  actor: z.string(),
+  actor_user_id: z.string().nullable(),
+  organization_id: z.string().nullable(),
   action: z.string(),
-  target: z.string().nullable().optional(),
+  resource_type: z.string(),
+  resource_id: z.string().nullable(),
   occurred_at: z.string(),
-  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const sessionSchema = z.object({

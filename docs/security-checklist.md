@@ -20,9 +20,17 @@ This checklist tracks the security posture of FIRIP. Items are marked
 - [x] `AUTH_DEV_BYPASS` exists only for local development/tests and is
   `0`/`false` by default. It must never be set in a deployed environment —
   treat any deployment with this flag enabled as a critical misconfiguration.
-- [ ] Role-based access control is enforced at the router/dependency layer
+- [x] Role-based access control is enforced at the router/dependency layer
   for every endpoint that returns org-scoped or role-restricted data —
-  verify per-endpoint as routers are completed (see `apps/api/app/routers`).
+  audited 2026-06 across every router in `apps/api/app/routers`:
+  `admin.py` (sources/ingestion-runs/audit-logs) requires `require_admin`;
+  `subscriptions.py` and `auth.py`'s session/me endpoints require
+  `get_current_user` and additionally scope queries by the authenticated
+  user's own `user.id` (e.g. `DELETE /subscriptions/{id}` cannot affect
+  another user's row); `alerts.py`/`flood.py`/`map.py`/`procurement.py`/
+  `risk.py`/`search.py`/`water.py` are intentionally public — they only
+  ever serve public government flood/water/risk data, never org- or
+  user-scoped records. Re-audit whenever a new router or endpoint is added.
 - [x] Audit logging (`audit_logs` table) records mutating actions with
   actor, action, target, and timestamp.
 
@@ -42,10 +50,17 @@ This checklist tracks the security posture of FIRIP. Items are marked
 
 ## Application security
 
-- [ ] Input validation: Pydantic schemas validate all request bodies;
-  spot-check that path/query parameters used in raw SQL (if any) are
-  parameterized, never string-interpolated.
-- [ ] CORS is restricted to `CORS_ORIGINS` (no wildcard `*` in production).
+- [x] Input validation: Pydantic schemas validate all request bodies. Every
+  router uses the SQLAlchemy ORM (`select(...)`/`.where(...)`); the only
+  raw SQL in the codebase is the static, parameterless `SELECT 1` health
+  check in `app/routers/system.py` — no string-interpolated SQL anywhere.
+  Client-supplied ids/filters bound to GUID-typed columns are pre-validated
+  with `app.models.types.is_valid_guid()` before querying (see `risk.py`,
+  `water.py`, `subscriptions.py`, `admin.py`'s `organization_id` filter) so
+  a malformed id/filter returns a clean 404/empty-page instead of an
+  unhandled 500 from `GUID.process_bind_param`'s `uuid.UUID(value)` call.
+- [x] CORS is restricted to `CORS_ORIGINS` (`app/config.py::cors_origin_list`,
+  default `http://localhost:3000`) — no wildcard `*` default or fallback.
 - [ ] Rate limiting on public-facing endpoints — not yet implemented; track
   as a pre-launch gap if FIRIP is exposed without a CDN/WAF in front.
 - [ ] Dependency scanning (`npm audit`, `pip-audit` or equivalent) run in CI
@@ -67,6 +82,11 @@ result:
   `next build` time (no shadcn CLI, no `next/font/google`, Mapbox/Clerk
   both degrade gracefully when their tokens are absent) specifically
   because this sandbox could not reach those services either.
-- Docker images were never built or run in this sandbox (no Docker daemon
-  available) — `docker compose up --build` must be verified in a real
-  environment before relying on it.
+- Docker images were never built or run in this sandbox (the `docker` CLI
+  is present but there is no privilege to start a daemon) —
+  `docker compose -f infra/docker-compose.yml up --build` must be verified
+  in a real environment before relying on it. The Postgres+PostGIS+pgvector
+  setup that image encodes (`infra/postgres/`) *was* verified directly
+  against host-installed Postgres 16 packages in this sandbox, including a
+  full `alembic upgrade head` run — see
+  [`infra/postgres/README.md`](../infra/postgres/README.md).

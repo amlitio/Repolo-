@@ -8,10 +8,10 @@ import {
 } from "@/lib/api/endpoints";
 import { queryKeys } from "./queryKeys";
 
-export function useAdminSources(page?: number) {
+export function useAdminSources() {
   return useQuery({
-    queryKey: queryKeys.adminSources(page),
-    queryFn: () => adminListSources({ page }),
+    queryKey: queryKeys.adminSources(),
+    queryFn: () => adminListSources(),
   });
 }
 

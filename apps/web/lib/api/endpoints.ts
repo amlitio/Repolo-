@@ -320,11 +320,11 @@ export interface AdminListParams {
   page?: number;
 }
 
-export async function adminListSources(
-  params: AdminListParams = {}
-): Promise<Paginated<SourceRegistryEntry>> {
-  const data = await apiFetch<unknown>("/admin/sources", { query: { page: params.page } });
-  return paginated(sourceRegistryEntrySchema).parse(data) as Paginated<SourceRegistryEntry>;
+export async function adminListSources(): Promise<SourceRegistryEntry[]> {
+  // GET /admin/sources returns the full static registry as a bare array
+  // (it isn't backed by a paginated table - see app/routers/admin.py).
+  const data = await apiFetch<unknown>("/admin/sources");
+  return z.array(sourceRegistryEntrySchema).parse(data) as SourceRegistryEntry[];
 }
 
 export interface AdminListIngestionRunsParams {

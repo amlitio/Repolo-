@@ -1,0 +1,83 @@
+# Local dev stack: Postgres+PostGIS+pgvector, the API, the ingestion worker,
+# and the web app, wired together with the same DATABASE_URL/NEXT_PUBLIC_*
+# contract documented in apps/api/.env.example and apps/web/.env.example.
+#
+# Run from the repo root:
+#   docker compose -f infra/docker-compose.yml up --build
+#
+# First run only: apply the schema (the `migrate` service below does this
+# automatically and exits 0; re-run it any time after pulling new migrations
+# with `docker compose -f infra/docker-compose.yml run --rm migrate`).
+#
+# See infra/postgres/README.md for what's been verified vs. not.
+
+name: firip
+
+services:
+  db:
+    build:
+      context: postgres
+    environment:
+      POSTGRES_USER: firip
+      POSTGRES_PASSWORD: firip
+      POSTGRES_DB: firip
+    ports:
+      - "5432:5432"
+    volumes:
+      - firip-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U firip -d firip"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://firip:firip@db:5432/firip
+    command: ["alembic", "upgrade", "head"]
+    working_dir: /repo/apps/api
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://firip:firip@db:5432/firip
+      CORS_ORIGINS: http://localhost:3000
+      AUTH_DEV_BYPASS: "1"
+      PORT: "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  workers:
+    build:
+      context: ..
+      dockerfile: apps/workers/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://firip:firip@db:5432/firip
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  firip-db-data:

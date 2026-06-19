@@ -4,8 +4,10 @@ GeoAlchemy2's Geometry type and pgvector's Vector type both require Postgres
 extensions (PostGIS / pgvector) to create real columns. To keep the bulk of
 the unit-test suite running against plain SQLite (no Postgres available in
 this sandbox), we wrap both in dialect-aware TypeDecorators: on Postgres they
-delegate to the real PostGIS/pgvector types; on every other dialect (sqlite)
-they degrade to a TEXT/JSON-serializable column so `CREATE TABLE` and basic
+delegate to the real PostGIS/pgvector types (verified against a live
+Postgres+PostGIS+pgvector instance via
+`alembic/versions/181ea66c4f40_initial_schema.py`); on every other dialect
+(sqlite) they degrade to a JSON column so `CREATE TABLE` and basic
 round-trip storage still work for tables that incidentally have a geometry or
 vector column but aren't the focus of a given unit test.
 
@@ -17,13 +19,12 @@ testing constraints.
 
 from __future__ import annotations
 
-import json
 import uuid
 
 from geoalchemy2 import Geometry as _PostGISGeometry
 from pgvector.sqlalchemy import Vector as _PgVector
 from sqlalchemy.dialects.postgresql import UUID as _PostgresUUID
-from sqlalchemy.types import CHAR, JSON, TypeDecorator, UserDefinedType
+from sqlalchemy.types import CHAR, JSON, TypeDecorator
 
 
 class GUID(TypeDecorator):
@@ -73,48 +74,69 @@ def is_valid_guid(value: str | None) -> bool:
     return True
 
 
-class PortableGeometry(UserDefinedType):
+class PortableGeometry(TypeDecorator):
     """Geometry column that is a real PostGIS geometry on Postgres and a
-    GeoJSON-serialized TEXT column elsewhere (e.g. SQLite in unit tests)."""
+    GeoJSON-shaped JSON column elsewhere (e.g. SQLite in unit tests).
 
+    Mirrors `PortableVector` below rather than using a bare
+    `UserDefinedType`: `UserDefinedType.get_col_spec()` has no reliable
+    per-dialect hook, so a previous version of this type emitted bare
+    `TEXT` columns on Postgres too, silently breaking every spatial query
+    (ST_Intersects, bbox search) the map relies on.
+    `TypeDecorator.load_dialect_impl()` is what actually drives DDL column
+    type resolution per dialect, and embedding a real `Geometry()`/`Vector()`
+    instance directly (e.g. via `with_variant()`) also isn't safe here:
+    GeoAlchemy2 attaches `Table`-level DDL event listeners (legacy
+    `AddGeometryColumn`/`RecoverGeometryColumn` SpatiaLite management calls)
+    to any column whose type is an actual `Geometry` instance, which fire
+    even on plain SQLite (no SpatiaLite extension loaded) and crash table
+    creation in tests. Wrapping it in `TypeDecorator` avoids that entirely.
+    """
+
+    impl = JSON
     cache_ok = True
 
-    def __init__(self, geometry_type: str = "GEOMETRY", srid: int = 4326) -> None:
+    def __init__(self, geometry_type: str = "GEOMETRY", srid: int = 4326, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self.geometry_type = geometry_type
         self.srid = srid
-
-    def get_col_spec(self, **kw):  # pragma: no cover - only used outside Postgres
-        return "TEXT"
+        # A real Geometry instance to delegate attribute lookups to (see
+        # __getattr__ below) - never used directly as a column type.
+        self._postgis_geometry = _PostGISGeometry(geometry_type=geometry_type, srid=srid)
 
     def load_dialect_impl(self, dialect):
+        # GeoAlchemy2's check_management() probes arbitrary TypeDecorator
+        # columns with dialect=None to test whether they wrap a Raster type
+        # (geoalchemy2/admin/dialects/common.py:_check_spatial_type). dialect
+        # has no .type_descriptor() either in that case, so short-circuit to
+        # a bare JSON() instance rather than crashing on dialect.name.
+        if dialect is None:
+            return JSON()
         if dialect.name == "postgresql":
-            return dialect.type_descriptor(_PostGISGeometry(geometry_type=self.geometry_type, srid=self.srid))
+            return dialect.type_descriptor(self._postgis_geometry)
         return dialect.type_descriptor(JSON())
 
-    def bind_processor(self, dialect):
-        if dialect.name == "postgresql":
-            return None
+    def __getattr__(self, key):
+        # GeoAlchemy2's Table/Column DDL event listeners (spatial index
+        # creation - see geoalchemy2/admin/dialects/postgresql.py
+        # after_create/before_create) read Geometry-specific attributes
+        # (spatial_index, use_typmod, dimension, srid, geometry_type)
+        # straight off `column.type`, without a dialect context and without
+        # an attribute-error-tolerant getattr() default in every call site.
+        # TypeDecorator's own __getattr__ proxies to self.impl_instance,
+        # which is always the generic JSON() impl (never the dialect-
+        # resolved Geometry), so those reads would otherwise raise
+        # AttributeError even on Postgres. Proxy to the real Geometry
+        # instance instead, which has the correct values for both.
+        return getattr(self._postgis_geometry, key)
 
-        def process(value):
-            if value is None:
-                return None
-            return value if isinstance(value, str) else json.dumps(value)
-
-        return process
-
-    def result_processor(self, dialect, coltype):
-        if dialect.name == "postgresql":
-            return None
-
-        def process(value):
-            if value is None:
-                return None
-            try:
-                return json.loads(value)
-            except (TypeError, ValueError):
-                return value
-
-        return process
+    def __repr__(self) -> str:
+        # TypeDecorator.__repr__ inspects self.impl_instance (JSON) by
+        # default, which has no geometry_type/srid params - Alembic
+        # autogenerate calls repr() to render this type into migration
+        # scripts, so without this override every generated geometry column
+        # would silently fall back to the generic_type/srid defaults.
+        return f"PortableGeometry(geometry_type={self.geometry_type!r}, srid={self.srid!r})"
 
 
 class PortableVector(TypeDecorator):
@@ -131,3 +153,6 @@ class PortableVector(TypeDecorator):
         if dialect.name == "postgresql":
             return dialect.type_descriptor(_PgVector(self.dim))
         return dialect.type_descriptor(JSON())
+
+    def __repr__(self) -> str:
+        return f"PortableVector(dim={self.dim!r})"

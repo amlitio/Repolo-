@@ -28,6 +28,7 @@ COPY --from=deps /usr/local/bin /usr/local/bin
 
 COPY apps/api/app apps/api/app
 COPY apps/api/alembic apps/api/alembic
+COPY apps/api/alembic.ini apps/api/alembic.ini
 COPY apps/api/pyproject.toml apps/api/pyproject.toml
 COPY packages/shared/data packages/shared/data
 

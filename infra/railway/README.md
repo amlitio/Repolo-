@@ -30,8 +30,8 @@ Postgres template does not enable them by default).
 - These config files were never deployed or tested against a live Railway
   project from the sandbox this repo was scaffolded in (no network access
   to railway.com). Validate the build/deploy commands against
-  `apps/api/Dockerfile` and `apps/workers/Dockerfile` once those exist and
-  before the first real deploy.
+  `apps/api/Dockerfile` and `apps/workers/Dockerfile` before the first real
+  deploy.
 - `healthcheckPath: /health` assumes `apps/api` exposes a `GET /health`
   endpoint that does not require auth — confirm this matches the actual
   router.

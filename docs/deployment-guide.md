@@ -27,18 +27,23 @@ python -m worker.scheduler
 
 ## Local development with Docker Compose
 
-`infra/docker-compose.yml` runs Postgres+PostGIS, the API, the worker, and
-the web app together. **This compose file has not been run end-to-end in
-the environment this repo was scaffolded in** — there was no Docker daemon
-available in that sandbox. Before relying on it:
+`infra/docker-compose.yml` runs Postgres+PostGIS+pgvector (built from
+[`infra/postgres/`](../infra/postgres/)), a one-shot `migrate` service
+(`alembic upgrade head`), the API, the worker, and the web app together:
 
 ```bash
 docker compose -f infra/docker-compose.yml up --build
 ```
 
-verify all four services start cleanly, the api can reach the db, and the
-web app can reach the api, in an environment that actually has Docker
-running.
+**The `docker build`/`up` step itself has not been run end-to-end in the
+environment this repo was scaffolded in** — that sandbox has the `docker`
+CLI but no privilege to start a daemon. The Alembic migration it runs *has*
+been verified end-to-end against a real Postgres 16 + PostGIS 3.4.2 +
+pgvector 0.6.0 instance (see [`infra/postgres/README.md`](../infra/postgres/README.md)
+for exactly what was and wasn't exercised, and how). Before relying on the
+compose file itself, verify all services start cleanly, the api can reach
+the db, and the web app can reach the api, in an environment with a working
+Docker daemon.
 
 ## First deploy checklist
 
@@ -46,10 +51,12 @@ running.
    `CREATE EXTENSION IF NOT EXISTS vector;`.
 2. Run `alembic upgrade head` against that database from `apps/api`
    (e.g. `railway run alembic upgrade head` or `flyctl ssh console` then
-   run it inside the deployed container) — this has only been exercised
-   against SQLite in-memory in this repo's own test suite, never against a
-   real Postgres+PostGIS instance, so watch for PostGIS-specific migration
-   issues on the first run.
+   run it inside the deployed container, or `docker compose -f
+   infra/docker-compose.yml run --rm migrate` locally). Verified end-to-end
+   against real Postgres+PostGIS+pgvector — see
+   [`infra/postgres/README.md`](../infra/postgres/README.md) — but still
+   watch the first run against any new managed Postgres provider for
+   provider-specific extension/permission quirks.
 3. Set all required environment variables on `apps/api` and
    `apps/workers` from `apps/api/.env.example`, and on `apps/web` from
    `apps/web/.env.example`. At minimum for a non-degraded deploy:

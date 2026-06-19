@@ -72,7 +72,7 @@ function SourcesTable() {
       />
     );
   }
-  if (!data || data.items.length === 0) return <EmptyState title="No sources registered" />;
+  if (!data || data.length === 0) return <EmptyState title="No sources registered" />;
 
   return (
     <table className="w-full text-left text-xs">
@@ -85,7 +85,7 @@ function SourcesTable() {
         </tr>
       </thead>
       <tbody>
-        {data.items.map((source) => (
+        {data.map((source) => (
           <tr key={source.id} className="border-b border-slate-900 text-slate-300">
             <td className="py-1.5 pr-3">{source.name}</td>
             <td className="py-1.5 pr-3">{source.agency}</td>
@@ -163,7 +163,8 @@ function AuditLogsTable() {
           <span className="font-mono text-[10px] text-slate-500">
             {new Date(entry.occurred_at).toLocaleString()}
           </span>{" "}
-          {entry.actor} {entry.action} {entry.target ?? ""}
+          {entry.actor_user_id ?? "system"} {entry.action} {entry.resource_type}
+          {entry.resource_id ? `:${entry.resource_id}` : ""}
         </li>
       ))}
     </ul>
