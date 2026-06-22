@@ -24,6 +24,11 @@ This checklist tracks the security posture of FIRIP. Items are marked
   for every endpoint that returns org-scoped or role-restricted data —
   audited 2026-06 across every router in `apps/api/app/routers`:
   `admin.py` (sources/ingestion-runs/audit-logs) requires `require_admin`;
+  `GET /admin/audit-logs` additionally resolves the caller's own internal
+  organization from their Clerk session and hard-scopes the query to it —
+  it never accepts a caller-supplied organization id, since `admin` is an
+  org-scoped Clerk role rather than a platform superuser, and returns an
+  empty page (not an error) if the caller has no provisioned org context;
   `subscriptions.py` and `auth.py`'s session/me endpoints require
   `get_current_user` and additionally scope queries by the authenticated
   user's own `user.id` (e.g. `DELETE /subscriptions/{id}` cannot affect

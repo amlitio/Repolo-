@@ -54,7 +54,9 @@ class LayerVersion(Base, TimestampMixin):
     __tablename__ = "layer_versions"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    layer_id: Mapped[str] = mapped_column(String(100), ForeignKey("map_layers.id"), nullable=False)
+    layer_id: Mapped[str] = mapped_column(
+        String(100), ForeignKey("map_layers.id", ondelete="CASCADE"), nullable=False, index=True
+    )
     version_label: Mapped[str] = mapped_column(String(100), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
 
@@ -65,7 +67,9 @@ class GisFeature(Base, TimestampMixin):
     __tablename__ = "gis_features"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    layer_version_id: Mapped[str] = mapped_column(GUID(), ForeignKey("layer_versions.id"), nullable=False)
+    layer_version_id: Mapped[str] = mapped_column(
+        GUID(), ForeignKey("layer_versions.id", ondelete="CASCADE"), nullable=False, index=True
+    )
     external_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     geometry = mapped_column(PortableGeometry(geometry_type="GEOMETRY", srid=4326), nullable=True)
     properties_json: Mapped[str | None] = mapped_column(Text, nullable=True)

@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, String, Text
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
@@ -27,7 +27,9 @@ class Alert(Base, TimestampMixin):
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
     alert_type: Mapped[str] = mapped_column(String(100), nullable=False)  # e.g. "weather", "risk_change"
     county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True)
-    property_id: Mapped[str | None] = mapped_column(GUID(), nullable=True)
+    property_id: Mapped[str | None] = mapped_column(
+        GUID(), ForeignKey("properties.id", ondelete="SET NULL"), nullable=True
+    )
     severity: Mapped[str] = mapped_column(String(50), nullable=False, default="Unknown")
     title: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)

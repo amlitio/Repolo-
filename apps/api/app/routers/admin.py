@@ -13,7 +13,7 @@ from app.core.registry import get_registry
 from app.db import get_db
 from app.models.admin import SourceRun as SourceRunModel
 from app.models.org import AuditLog as AuditLogModel
-from app.models.types import is_valid_guid
+from app.models.org import Organization
 from app.schemas.admin import AuditLogEntry, SourceRun
 from app.schemas.common import Paginated
 from app.schemas.registry import SourceRegistryEntry
@@ -82,25 +82,33 @@ async def list_ingestion_runs(
     "/admin/audit-logs",
     response_model=Paginated[AuditLogEntry],
     summary="List audit log entries",
+    description="Scoped to the caller's own organization. 'admin' (see "
+    "app/core/auth.py require_admin) is an org-scoped Clerk role, not a "
+    "platform superuser, so this must never accept a caller-supplied "
+    "organization id - doing so would let any org's admin read another "
+    "org's audit log.",
 )
 async def list_audit_logs(
-    _current_user: CurrentUser = Depends(require_admin),
+    current_user: CurrentUser = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
-    organization_id: str | None = Query(None),
     action: str | None = Query(None),
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=500),
 ) -> Paginated[AuditLogEntry]:
-    if organization_id and not is_valid_guid(organization_id):
-        # A malformed id can never match a real row - return an empty page
-        # rather than letting GUID.process_bind_param raise ValueError,
-        # which would otherwise surface as an unhandled 500 for an ordinary
-        # client typo (see app.models.types.is_valid_guid docstring).
+    org_id: str | None = None
+    if current_user.org_id:
+        org_result = await db.execute(
+            select(Organization.id).where(Organization.clerk_org_id == current_user.org_id)
+        )
+        org_id = org_result.scalar_one_or_none()
+
+    if org_id is None:
+        # No org context on this Clerk session, or it has never been
+        # provisioned internally (see app/core/provisioning.py) - there is
+        # no tenant to scope to, so there is nothing this caller can see.
         return Paginated[AuditLogEntry](items=[], total=0, page=page, page_size=page_size)
 
-    stmt = select(AuditLogModel)
-    if organization_id:
-        stmt = stmt.where(AuditLogModel.organization_id == organization_id)
+    stmt = select(AuditLogModel).where(AuditLogModel.organization_id == org_id)
     if action:
         stmt = stmt.where(AuditLogModel.action == action)
     stmt = stmt.order_by(AuditLogModel.occurred_at.desc())

@@ -37,9 +37,11 @@ class SourceRun(Base, TimestampMixin):
     __tablename__ = "source_runs"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    source_id: Mapped[str] = mapped_column(String(100), ForeignKey("sources.id"), nullable=False)
+    source_id: Mapped[str] = mapped_column(
+        String(100), ForeignKey("sources.id", ondelete="CASCADE"), nullable=False, index=True
+    )
     status: Mapped[str] = mapped_column(String(50), nullable=False)  # success | partial | failed | degraded
-    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     records_fetched: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     records_normalized: Mapped[int] = mapped_column(Integer, default=0, nullable=False)

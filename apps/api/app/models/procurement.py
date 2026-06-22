@@ -26,7 +26,7 @@ class ProcurementOpportunity(Base, TimestampMixin):
     external_id: Mapped[str] = mapped_column(String(255), nullable=False)
     title: Mapped[str] = mapped_column(Text, nullable=False)
     agency: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True)
+    county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True, index=True)
     posted_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     response_due_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     url: Mapped[str | None] = mapped_column(Text, nullable=True)

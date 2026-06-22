@@ -20,6 +20,7 @@ import asyncio
 import logging
 import sys
 
+from app.config import get_settings
 from app.db import AsyncSessionLocal, init_models
 
 from worker.agents.base import Agent, AgentRunResult
@@ -47,12 +48,27 @@ async def _run_agent(agent_cls: type[Agent]) -> AgentRunResult:
     agent = agent_cls()
     async with AsyncSessionLocal() as session:
         result = await agent.run(session)
-        await session.commit()
+        try:
+            await session.commit()
+        except Exception as exc:  # noqa: BLE001 - a failed commit must not crash the scheduler
+            await session.rollback()
+            logger.exception("Commit failed for agent %s", agent.name)
+            return AgentRunResult(
+                agent_name=result.agent_name,
+                status="failed",
+                started_at=result.started_at,
+                finished_at=result.finished_at,
+                summary=f"Agent ran but its commit failed: {exc}",
+            )
         return result
 
 
 async def run_once() -> list[AgentRunResult]:
-    await init_models()
+    settings = get_settings()
+    if settings.database_url.startswith("sqlite"):
+        # Production schema changes go through Alembic only; create_all here
+        # is for local/test sqlite convenience, mirroring apps/api/app/main.py.
+        await init_models()
     results: list[AgentRunResult] = []
     for agent_cls in SCHEDULED_AGENTS:
         result = await _run_agent(agent_cls)

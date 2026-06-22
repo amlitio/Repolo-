@@ -4,10 +4,11 @@
 
 - **apps/web** -> Vercel (see [`infra/vercel/`](../infra/vercel/))
 - **apps/api** + **apps/workers** -> Railway (see [`infra/railway/`](../infra/railway/)),
-  or Fly.io as an alternative (see [`infra/fly/`](../infra/fly/))
+  Fly.io (see [`infra/fly/`](../infra/fly/)), or Cloud Run on Google Cloud
+  (see [`infra/gcp/`](../infra/gcp/)) - pick one
 - **Database** -> managed Postgres with the `postgis` and `vector`
-  extensions enabled (Railway's or Fly's managed Postgres, or any Postgres
-  16+ host that allows installing those extensions)
+  extensions enabled (Railway's, Fly's, or Cloud SQL's managed Postgres, or
+  any Postgres 16+ host that allows installing those extensions)
 
 ## Local development (no containers required)
 

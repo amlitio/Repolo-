@@ -19,7 +19,7 @@ class FloodZone(Base, TimestampMixin):
     __tablename__ = "flood_zones"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    fips: Mapped[str] = mapped_column(String(5), nullable=False)
+    fips: Mapped[str] = mapped_column(String(5), nullable=False, index=True)
     zone_label: Mapped[str] = mapped_column(String(50), nullable=False)
     is_special_flood_hazard_area: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     base_flood_elevation: Mapped[float | None] = mapped_column(Float, nullable=True)

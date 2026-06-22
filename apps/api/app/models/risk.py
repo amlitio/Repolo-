@@ -16,7 +16,7 @@ class Property(Base, TimestampMixin):
     __tablename__ = "properties"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    address: Mapped[str] = mapped_column(Text, nullable=False)
+    address: Mapped[str] = mapped_column(Text, nullable=False, index=True)
     county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True)
     parcel_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
     latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
@@ -30,7 +30,9 @@ class PropertyRiskScore(Base, TimestampMixin):
     __tablename__ = "property_risk_scores"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    property_id: Mapped[str] = mapped_column(GUID(), ForeignKey("properties.id"), nullable=False)
+    property_id: Mapped[str] = mapped_column(
+        GUID(), ForeignKey("properties.id", ondelete="CASCADE"), nullable=False, index=True
+    )
     score: Mapped[float] = mapped_column(Float, nullable=False)
     grade: Mapped[str] = mapped_column(String(1), nullable=False)
     factors_json: Mapped[str] = mapped_column(Text, nullable=False)  # JSON-encoded list[RiskFactor]
@@ -45,7 +47,7 @@ class CountyRiskScore(Base, TimestampMixin):
     __tablename__ = "county_risk_scores"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    county_fips: Mapped[str] = mapped_column(String(5), nullable=False)
+    county_fips: Mapped[str] = mapped_column(String(5), nullable=False, index=True)
     county_name: Mapped[str] = mapped_column(String(100), nullable=False)
     score: Mapped[float] = mapped_column(Float, nullable=False)
     grade: Mapped[str] = mapped_column(String(1), nullable=False)
@@ -63,8 +65,10 @@ class ScoreExplanation(Base, TimestampMixin):
     __tablename__ = "score_explanations"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    property_id: Mapped[str | None] = mapped_column(GUID(), ForeignKey("properties.id"), nullable=True)
-    county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True)
+    property_id: Mapped[str | None] = mapped_column(
+        GUID(), ForeignKey("properties.id", ondelete="CASCADE"), nullable=True, index=True
+    )
+    county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True, index=True)
     model_version: Mapped[str] = mapped_column(String(50), nullable=False)
     methodology: Mapped[str] = mapped_column(Text, nullable=False)
     factors_json: Mapped[str] = mapped_column(Text, nullable=False)

@@ -1,0 +1,44 @@
+# Builds apps/api's Docker image (root build context - see apps/api/Dockerfile)
+# and deploys it to Cloud Run. Submit from the repo root:
+#   gcloud builds submit --config infra/gcp/cloudbuild.yaml .
+#
+# Requires an Artifact Registry Docker repo and a Cloud Run service to
+# already exist (or `gcloud run deploy` will create the service on first
+# run). DATABASE_URL/CLERK_*/etc are NOT set here - configure them once via
+# `gcloud run services update firip-api --set-env-vars ...` or
+# `--set-secrets` against Secret Manager, so they aren't duplicated on every
+# build.
+substitutions:
+  _REGION: us-east1
+  _REPOSITORY: firip
+  _SERVICE: firip-api
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - apps/api/Dockerfile
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_SERVICE}:$SHORT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_SERVICE}:$SHORT_SHA
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_SERVICE}:$SHORT_SHA
+      - --region=${_REGION}
+      - --platform=managed
+      - --port=8080
+      - --allow-unauthenticated
+
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_SERVICE}:$SHORT_SHA

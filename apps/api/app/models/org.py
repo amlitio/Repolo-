@@ -39,8 +39,10 @@ class Membership(Base, TimestampMixin):
     __tablename__ = "memberships"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    user_id: Mapped[str] = mapped_column(GUID(), ForeignKey("users.id"), nullable=False)
-    organization_id: Mapped[str] = mapped_column(GUID(), ForeignKey("organizations.id"), nullable=False)
+    user_id: Mapped[str] = mapped_column(GUID(), ForeignKey("users.id"), nullable=False, index=True)
+    organization_id: Mapped[str] = mapped_column(
+        GUID(), ForeignKey("organizations.id"), nullable=False, index=True
+    )
     role: Mapped[str] = mapped_column(String(50), nullable=False, default="member")
 
     user: Mapped[User] = relationship(back_populates="memberships")
@@ -63,22 +65,24 @@ class AuditLog(Base, TimestampMixin):
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
     actor_user_id: Mapped[str | None] = mapped_column(GUID(), ForeignKey("users.id"), nullable=True)
     organization_id: Mapped[str | None] = mapped_column(
-        GUID(), ForeignKey("organizations.id"), nullable=True
+        GUID(), ForeignKey("organizations.id"), nullable=True, index=True
     )
-    action: Mapped[str] = mapped_column(String(100), nullable=False)
+    action: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
     resource_type: Mapped[str] = mapped_column(String(100), nullable=False)
     resource_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     metadata_json: Mapped[str | None] = mapped_column(Text, nullable=True)
-    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
 
 
 class Subscription(Base, TimestampMixin):
     __tablename__ = "subscriptions"
 
     id: Mapped[str] = mapped_column(GUID(), primary_key=True, default=new_uuid)
-    user_id: Mapped[str] = mapped_column(GUID(), ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[str] = mapped_column(GUID(), ForeignKey("users.id"), nullable=False, index=True)
     county_fips: Mapped[str | None] = mapped_column(String(5), nullable=True)
-    property_id: Mapped[str | None] = mapped_column(GUID(), ForeignKey("properties.id"), nullable=True)
+    property_id: Mapped[str | None] = mapped_column(
+        GUID(), ForeignKey("properties.id", ondelete="SET NULL"), nullable=True
+    )
     channel: Mapped[str] = mapped_column(String(50), nullable=False)  # email | sms | webhook
     alert_types: Mapped[str] = mapped_column(Text, nullable=False, default="[]")  # JSON-encoded list
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)

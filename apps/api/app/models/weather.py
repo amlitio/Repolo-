@@ -30,7 +30,7 @@ class WeatherAlert(Base, TimestampMixin):
     effective_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     source_id: Mapped[str] = mapped_column(String(100), ForeignKey("sources.id"), nullable=False)
-    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
+    is_active: Mapped[bool] = mapped_column(default=True, nullable=False, index=True)
 
 
 class HurricaneTrack(Base, TimestampMixin):
