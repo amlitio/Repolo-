@@ -1,14 +1,93 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Map as MapboxMap } from "mapbox-gl";
+import type { GeoJSONSource, Map as MapboxMap } from "mapbox-gl";
 import { MAP_LAYER_IDS, type MapLayerDefinition } from "@firip/shared";
+import { useMapFeatures } from "@/lib/hooks/useMapFeatures";
 
 const FLORIDA_CENTER: [number, number] = [-81.5158, 27.6648];
 const FLORIDA_ZOOM = 6.2;
 
+/** Bounding box covering all of Florida including the Keys - used for every
+ * /map/features/query call so layer data is fetched once and cached rather
+ * than re-fetched on every pan (most layer geometries aren't even
+ * bbox-filtered server-side; see apps/api/app/routers/map.py). */
+const FLORIDA_BBOX: [number, number, number, number] = [-87.7, 24.4, -79.8, 31.1];
+
 /** Dark "Bloomberg terminal" basemap style. */
 const DARK_STYLE = "mapbox://styles/mapbox/dark-v11";
+
+/** Mapbox layer ids backing one MapLayerDefinition's source - polygon
+ * categories render as a fill+outline pair, everything else is a single layer. */
+function mapboxLayerIdsFor(layer: MapLayerDefinition): string[] {
+  switch (layer.category) {
+    case "water":
+    case "procurement":
+    case "hurricane":
+    case "boundary":
+      return [layer.id];
+    default:
+      return [`${layer.id}-fill`, `${layer.id}-line`];
+  }
+}
+
+/** Adds the paint layer(s) for a freshly-registered GeoJSON source, styled by geometry shape. */
+function addLayerToMap(map: MapboxMap, layer: MapLayerDefinition) {
+  const color = layer.legend[0]?.color ?? "#38bdf8";
+  const zoomRange = { minzoom: layer.min_zoom, maxzoom: layer.max_zoom };
+
+  switch (layer.category) {
+    case "water":
+    case "procurement":
+      map.addLayer({
+        id: layer.id,
+        type: "circle",
+        source: layer.id,
+        ...zoomRange,
+        paint: {
+          "circle-radius": 5,
+          "circle-color": color,
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#0f172a",
+        },
+      });
+      return;
+    case "hurricane":
+    case "boundary":
+      map.addLayer({
+        id: layer.id,
+        type: "line",
+        source: layer.id,
+        ...zoomRange,
+        paint: {
+          "line-color": color,
+          "line-width": 2,
+        },
+      });
+      return;
+    default:
+      map.addLayer({
+        id: `${layer.id}-fill`,
+        type: "fill",
+        source: layer.id,
+        ...zoomRange,
+        paint: {
+          "fill-color": color,
+          "fill-opacity": 0.35,
+        },
+      });
+      map.addLayer({
+        id: `${layer.id}-line`,
+        type: "line",
+        source: layer.id,
+        ...zoomRange,
+        paint: {
+          "line-color": color,
+          "line-width": 1,
+        },
+      });
+  }
+}
 
 export interface MapCanvasProps {
   visibleLayerIds: string[];
@@ -36,6 +115,9 @@ export function MapCanvas({ visibleLayerIds, layers, flyTo }: MapCanvasProps) {
     token ? "loading" : "no-token"
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const layerIds = layers.map((layer) => layer.id);
+  const featureResults = useMapFeatures(layerIds, FLORIDA_BBOX);
 
   useEffect(() => {
     if (!token) return;
@@ -89,19 +171,44 @@ export function MapCanvas({ visibleLayerIds, layers, flyTo }: MapCanvasProps) {
     mapRef.current.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? 11 });
   }, [flyTo, status]);
 
-  // Layer add/remove driven by LayerManager state. Each MapLayerDefinition
-  // is expected to back a mapbox source+layer pair once apps/api serves
-  // real GeoJSON via /map/features/query; for now this wiring is a no-op
-  // beyond toggling visibility on layers that already exist on the map
-  // instance, since tile/source registration depends on live data.
+  // Registers a GeoJSON source + paint layer(s) for each layer's data as it
+  // arrives from useMapFeatures, and pushes updated data into the source if
+  // it's already registered (e.g. after a query refetch).
   useEffect(() => {
     const map = mapRef.current;
     if (!map || status !== "ready") return;
 
     for (const layer of layers) {
-      if (!map.getLayer(layer.id)) continue;
+      const result = featureResults.find((r) => r.layerId === layer.id);
+      if (!result?.data) continue;
+
+      const existingSource = map.getSource(layer.id) as GeoJSONSource | undefined;
+      if (existingSource) {
+        existingSource.setData(result.data);
+        continue;
+      }
+
+      map.addSource(layer.id, { type: "geojson", data: result.data });
+      addLayerToMap(map, layer);
       const visibility = visibleLayerIds.includes(layer.id) ? "visible" : "none";
-      map.setLayoutProperty(layer.id, "visibility", visibility);
+      for (const id of mapboxLayerIdsFor(layer)) {
+        map.setLayoutProperty(id, "visibility", visibility);
+      }
+    }
+  }, [layers, featureResults, status, visibleLayerIds]);
+
+  // Layer visibility driven by LayerManager state, applied to layers that
+  // already have a registered source (see effect above).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || status !== "ready") return;
+
+    for (const layer of layers) {
+      const visibility = visibleLayerIds.includes(layer.id) ? "visible" : "none";
+      for (const id of mapboxLayerIdsFor(layer)) {
+        if (!map.getLayer(id)) continue;
+        map.setLayoutProperty(id, "visibility", visibility);
+      }
     }
   }, [visibleLayerIds, layers, status]);
 

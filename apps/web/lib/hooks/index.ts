@@ -1,5 +1,6 @@
 export * from "./queryKeys";
 export * from "./useMapLayers";
+export * from "./useMapFeatures";
 export * from "./useMapSearch";
 export * from "./usePropertyRisk";
 export * from "./useCountyRisk";
